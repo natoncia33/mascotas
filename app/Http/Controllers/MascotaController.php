@@ -48,21 +48,24 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //ELOQUENT
-        // $this->validate($request,[ 'nombre'=>'required', 'edad'=>'required', 'especie'=>'required', 'clasificacion'=>'required', 'peso'=>'required', 'paisorigen'=>'required']);
-        // Mascota::create($request->all());
-        // return redirect()->route('mascota.index')->with('exito','La mascota fue registrada !!');
+        $v = \Validator::make($request->all(), [
+            
+            'nombre' => 'required',
+            'edad' => 'numeric|required|min:1|max:99',
+            'especie'    => 'required',
+            'clasificacion' => 'required',
+            'peso' => 'numeric|required|min:1|max:9999',
+            'paisorigen' => 'required'
 
-        //QUERYBUILDER
-        DB::table('mascotas')->insert(
-            ['nombre' => $request->nombre,
-             'edad' => $request->edad,
-             'especie' => $request->especie,
-             'clasificacion' => $request->clasificacion,
-             'peso' => $request->peso,
-             'paisorigen' => $request->paisorigen
-             ]
-        );
+        ]);
+ 
+        if ($v->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        //ELOQUENT
+        $this->validate($request,[ 'nombre'=>'required', 'edad'=>'required', 'especie'=>'required', 'clasificacion'=>'required', 'peso'=>'required', 'paisorigen'=>'required']);
+        Mascota::create($request->all());
         return redirect()->route('mascota.index')->with('exito','La mascota fue registrada !!');
         
     }
@@ -76,11 +79,7 @@ class MascotaController extends Controller
     public function show($id)
     {
         //ELOQUENT
-        // $mascota=Mascota::find($id);
-        // return view('mascota.show',compact('mascota'));
-
-        //QUERYBUILDER
-        $mascota = DB::table('mascotas')->where('id', $id)->first();
+        $mascota=Mascota::find($id);
         return view('mascota.show',compact('mascota'));
     }
 
@@ -92,7 +91,7 @@ class MascotaController extends Controller
      */
     public function edit($id)
     {
-        // 
+        //ELOQUENT
         $mascota=Mascota::find($id);
         return view('mascota.edit',compact('mascota'));
     }
@@ -106,21 +105,9 @@ class MascotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        // $this->validate($request,[ 'nombre'=>'required', 'edad'=>'required', 'especie'=>'required', 'clasificacion'=>'required', 'peso'=>'required', 'paisorigen'=>'required']);
-        // Mascota::find($id)->update($request->all());
-        // return redirect()->route('mascota.index')->with('success','Registro actualizado satisfactoriamente');
- 
-        DB::table('mascotas')
-            ->where('id', $id)
-            ->update( ['nombre' => $request->nombre,
-                    'edad' => $request->edad,
-                    'especie' => $request->especie,
-                    'clasificacion' => $request->clasificacion,
-                    'peso' => $request->peso,
-                    'paisorigen' => $request->paisorigen
-                    ]
-              );
+        //ELOQUENT
+        $this->validate($request,[ 'nombre'=>'required', 'edad'=>'required', 'especie'=>'required', 'clasificacion'=>'required', 'peso'=>'required', 'paisorigen'=>'required']);
+        Mascota::find($id)->update($request->all());
         return redirect()->route('mascota.index')->with('success','Registro actualizado satisfactoriamente');
 
     }
@@ -134,12 +121,8 @@ class MascotaController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // Mascota::find($id)->delete();
-        // return redirect()->route('mascota.index')->with('success','Registro eliminado satisfactoriamente');
-        
-        DB::table('mascotas')->where('id', $id)->delete();
+        //ELOQUENT
+        Mascota::find($id)->delete();
         return redirect()->route('mascota.index')->with('success','Registro eliminado satisfactoriamente');
-
     }
 }
