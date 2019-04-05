@@ -25,33 +25,38 @@
               @if($mascotas->count())  
               @foreach($mascotas as $mascota)  
               <tr>
-                <td>{{$mascota->nombre}}</td>
-                <td>{{$mascota->especie}}</td>
-                <td> 
-                    <a href="{{action('MascotaController@show', $mascota->id)}}" >
-                      <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
-                </td>
+                  <td>
+                      {{$mascota->nombre}}
+                  </td>
 
-                <td>
-                    <a href="{{action('MascotaController@edit', $mascota->id)}}" >
-                    <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                </td>
-                <td>
-                  <form action="{{action('MascotaController@destroy', $mascota->id)}}" method="post">
-                   {{csrf_field()}}
-                   <input name="_method" type="hidden" value="DELETE">
+                  <td>
+                      {{$mascota->especie}}
+                  </td>
+                  <td> 
+                      <a href="{{action('MascotaController@show', $mascota->id)}}" >
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                  </td>
 
-                   <button class="btn btn-danger btn-xs" type="submit">
-                   <span class="glyphicon glyphicon-remove"></span>
-                   </button>
-                 </td>
+                  <td>
+                      <a href="{{action('MascotaController@edit', $mascota->id)}}" >
+                      <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                  </td>
+                  <td>
+                    <form action="{{action('MascotaController@destroy', $mascota->id)}}" method="post">
+                        {{csrf_field()}}
+                        <input name="_method" type="hidden" value="DELETE">
+
+                        <button class="btn btn-danger btn-xs" type="submit">
+                         <span class="glyphicon glyphicon-remove">   </span>
+                        </button>
+                  </td>
                </tr>
                @endforeach 
                @else
                <tr>
-                <td colspan="8">No hay registro !!</td>
+                <td colspan="8">No hay registros !!</td>
               </tr>
               @endif
             </tbody>

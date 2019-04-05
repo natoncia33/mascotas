@@ -52,10 +52,6 @@
 									<div class="form-group">
 										<input type="text" name="clasificacion" id="clasificacion" class="form-control input-sm" placeholder="clasificacion de la mascota">
 
-										<!-- <select name="clasificacion" id="clasificacion">
-										 	<option value="Domectico">Domestico</option>
-											<option value="Salvaje">Salvaje</option>
-										</select> -->
 									</div>
 								</div>
 
