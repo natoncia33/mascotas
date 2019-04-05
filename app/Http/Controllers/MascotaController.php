@@ -51,9 +51,8 @@ class MascotaController extends Controller
      */
     public function show($id)
     {
-        //
-        $mascotas=Mascota::find($id);
-        return  view('libro.show',compact('mascotas'));
+        $mascota=Mascota::find($id);
+        return view('mascota.show',compact('mascota'));
     }
 
     /**
@@ -86,6 +85,7 @@ class MascotaController extends Controller
  
     }
 
+    
     /**
      * Remove the specified resource from storage.
      *

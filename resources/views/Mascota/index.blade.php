@@ -32,7 +32,8 @@
                 <td>{{$mascota->especie}}</td>
                 <td>{{$mascota->clasificacion}}</td>
                 <td>{{$mascota->peso}}</td>
-                <td>{{$mascota->paisorigen}}</td>
+                <td><a class="btn btn-primary btn-xs" href="{{action('MascotaController@show', $mascota->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a>  </td>
+                
                 <td><a class="btn btn-primary btn-xs" href="{{action('MascotaController@edit', $mascota->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                 <td>
                   <form action="{{action('MascotaController@destroy', $mascota->id)}}" method="post">

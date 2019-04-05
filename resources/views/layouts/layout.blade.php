@@ -9,7 +9,7 @@
 </head>
 <body>
  
-	<div class="container-fluid" style="margin-top: 100px">
+	<div class="container" style="margin-top: 100px">
  
 		@yield('content')
 	</div>
