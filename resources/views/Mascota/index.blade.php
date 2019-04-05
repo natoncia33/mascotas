@@ -15,11 +15,9 @@
             <table id="mytable" class="table table-bordred table-striped">
              <thead>
                <th>Nombre</th>
-               <th>Edad</th>
                <th>Especie</th>
-               <th>Clasificacion</th>
-               <th>Peso</th>
-               <th>Pais Origen</th>
+               
+               <th>Detalle</th>
                <th>Editar</th>
                <th>Eliminar</th>
              </thead>
@@ -28,19 +26,26 @@
               @foreach($mascotas as $mascota)  
               <tr>
                 <td>{{$mascota->nombre}}</td>
-                <td>{{$mascota->edad}}</td>
                 <td>{{$mascota->especie}}</td>
-                <td>{{$mascota->clasificacion}}</td>
-                <td>{{$mascota->peso}}</td>
-                <td><a class="btn btn-primary btn-xs" href="{{action('MascotaController@show', $mascota->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a>  </td>
-                
-                <td><a class="btn btn-primary btn-xs" href="{{action('MascotaController@edit', $mascota->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td> 
+                    <a href="{{action('MascotaController@show', $mascota->id)}}" >
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                </td>
+
+                <td>
+                    <a href="{{action('MascotaController@edit', $mascota->id)}}" >
+                    <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
                 <td>
                   <form action="{{action('MascotaController@destroy', $mascota->id)}}" method="post">
                    {{csrf_field()}}
                    <input name="_method" type="hidden" value="DELETE">
 
-                   <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                   <button class="btn btn-danger btn-xs" type="submit">
+                   <span class="glyphicon glyphicon-remove"></span>
+                   </button>
                  </td>
                </tr>
                @endforeach 
